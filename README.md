@@ -1,2 +1,6 @@
 # 25COP927
-25COP927 Fundamentals of AI
+This is a repository for all my tutorial and coursework for this module.
+
+# Lab 1
+RPS using Bayesian Theory
+
