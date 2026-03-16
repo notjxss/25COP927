@@ -7,16 +7,6 @@ Goal
 ----
 Play Rock–Paper–Scissors (RPS) against a computer that chooses *randomly*.
 
-Why this file exists
---------------------
-This is the **baseline** program students start from. It is intentionally simple:
-
-* Input validation (only accept rock/paper/scissors)
-* Random choice for the computer
-* Clear calculation of win / loss / tie
-* A small "histogram" (counts) printed at the end
-
-Students will later extend this baseline with Bayesian learning.
 
 How to run
 ----------
@@ -95,11 +85,28 @@ def get_user_move() -> str:
         print("Invalid input. Please type r/p/s or rock/paper/scissors.")
 
 
-def get_computer_move_random() -> str:
-    """Return a random move for the computer."""
+def get_computer_move(user_counts: dict[str,int]):
+    """Choose the computer's move based on the user's past moves.
 
-    # random.choice picks one element uniformly at random.
-    return random.choice(MOVES)
+    Parameters
+    ----------
+    user_counts : dict[str, int]
+        A dictionary with counts of the user's past outcomes (win/loss/tie).
+
+    Returns
+    -------
+    str
+        The computer's move ("rock"/"paper"/"scissors").
+    """
+
+    predicted_user_move = max(user_counts, key=user_counts.get)  # predict the user's next move based on past counts
+    if predicted_user_move == "rock":
+        return BEATS["rock"]
+    elif predicted_user_move == "paper":
+        return BEATS["paper"]
+    else:
+        return BEATS["scissors"]
+
 
 
 def outcome_from_user_perspective(user_move: str, computer_move: str) -> str:
@@ -197,6 +204,8 @@ def predict_next_outcome(counts: dict[str,int]):
         "tie": alpha_post["tie"] / total
     }
 
+
+
 # ---------------------------
 # Main program
 # ---------------------------
@@ -215,7 +224,7 @@ def main() -> None:
     # Play NUM_ROUNDS rounds.
     for i in range(1, NUM_ROUNDS + 1):
         user_move = get_user_move()  # ask the user for their move
-        computer_move = get_computer_move_random()  # choose randomly
+        computer_move = get_computer_move(counts)  # choose randomly
         outcome = outcome_from_user_perspective(user_move, computer_move)  # win/loss/tie
 
         # Print what happened this round.
