@@ -1,30 +1,6 @@
 """rps_lab1_part1_random.py
 
-Fundamentals of AI — Lab 1 (Part 1)
-==================================
-
-Goal
-----
-Play Rock–Paper–Scissors (RPS) against a computer that chooses *randomly*.
-
-Why this file exists
---------------------
-This is the **baseline** program students start from. It is intentionally simple:
-
-* Input validation (only accept rock/paper/scissors)
-* Random choice for the computer
-* Clear calculation of win / loss / tie
-* A small "histogram" (counts) printed at the end
-
-Students will later extend this baseline with Bayesian learning.
-
-How to run
-----------
-python rps_lab1_part1_random.py
-
-Tip for the lab
----------------
-Set NUM_ROUNDS to 15 to match the lab instructions.
+Fundamentals of AI — Lab 1 (Part 2)
 """
 
 # ---------------------------
